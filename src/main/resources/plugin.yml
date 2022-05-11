@@ -1,5 +1,5 @@
-name: HardCore
-main: tk.booky.hardcore.HardCoreMain
+name: Lifesteal
+main: dev.booky.lifesteal.LifestealMain
 version: ${version}
 author: booky10
 api-version: 1.18

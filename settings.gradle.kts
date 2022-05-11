@@ -1,2 +1,2 @@
-rootProject.name = "HardCore"
+rootProject.name = "Lifesteal"
 
