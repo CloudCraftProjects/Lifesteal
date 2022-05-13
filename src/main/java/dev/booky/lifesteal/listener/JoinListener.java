@@ -35,8 +35,12 @@ public class JoinListener implements Listener {
         int realMaxHealth = main.lives().getOrDefault(event.getPlayer().getUniqueId(), 10) * 2;
         if (realMaxHealth == instance.getBaseValue()) return;
 
+        double healthDiff = realMaxHealth - instance.getBaseValue();
         instance.setBaseValue(realMaxHealth);
-        event.getPlayer().setHealth(realMaxHealth);
+
+        if (event.getPlayer().isDead()) return;
+        double health = event.getPlayer().getHealth() + healthDiff;
+        event.getPlayer().setHealth(health < 1 ? health : health > realMaxHealth ? realMaxHealth : health);
     }
 
     @EventHandler
