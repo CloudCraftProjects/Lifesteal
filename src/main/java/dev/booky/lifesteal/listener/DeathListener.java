@@ -42,7 +42,7 @@ public record DeathListener(LifestealMain main) implements Listener {
     public void onPostRespawn(PlayerPostRespawnEvent event) {
         int targetHealthPoints = main.lives().getOrDefault(event.getPlayer().getUniqueId(), 10) * 2;
         if (targetHealthPoints <= 0) {
-            main.lives().put(event.getPlayer().getUniqueId(), 10);
+            main.lives().put(event.getPlayer().getUniqueId(), 5);
             Bukkit.broadcast(Component.translatable("lifesteal.listeners.death.broadcast").args(event.getPlayer().teamDisplayName()));
 
             MessageFormat format = GlobalTranslator.translator().translate("lifesteal.listeners.death.ban-reason", event.getPlayer().locale());

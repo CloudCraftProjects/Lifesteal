@@ -127,7 +127,7 @@ public class ReviveListener implements Listener {
                 event.getBlock().getWorld().strikeLightning(event.getBlock().getLocation()).setCausingPlayer(player);
 
                 Bukkit.getBanList(BanList.Type.NAME).pardon(target.getUniqueId().toString());
-                Bukkit.broadcast(Component.translatable("lifesteal.listeners.revive.sucess").args(Component.text(String.valueOf(target.getName())), player.teamDisplayName()));
+                Bukkit.broadcast(Component.translatable("lifesteal.listeners.revive.success").args(Component.text(String.valueOf(target.getName())), player.teamDisplayName()));
 
                 conversations.remove(player.getUniqueId());
                 player.clearTitle();

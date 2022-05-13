@@ -63,7 +63,7 @@ public class SetHeartsCommand extends CommandAPICommand implements CommandExecut
             player.banPlayer(format.toPattern(), main.getDescription().getName());
 
             sender.sendMessage(Component.translatable("lifesteal.command.set-hearts.banned").args(name));
-            main.lives().put(player.getUniqueId(), 10);
+            main.lives().put(player.getUniqueId(), 5);
             return;
         }
 

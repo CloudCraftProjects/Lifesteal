@@ -82,7 +82,7 @@ public class GiveHeart extends CommandAPICommand implements PlayerCommandExecuto
                             return Prompt.END_OF_CONVERSATION;
                         }
 
-                        main.lives().put(sender.getUniqueId(), 10);
+                        main.lives().put(sender.getUniqueId(), 5);
                         Bukkit.broadcast(Component.translatable("lifesteal.command.give-heart.too-many.broadcast").args(sender.teamDisplayName()));
 
                         MessageFormat format = GlobalTranslator.translator().translate("lifesteal.command.give-heart.too-many.ban-reason", sender.locale());

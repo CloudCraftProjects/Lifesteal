@@ -32,6 +32,7 @@ import java.util.UUID;
 public class LifestealMain extends JavaPlugin {
 
     private final Map<UUID, Integer> lives = new HashMap<>();
+    private StaticTranslator translator;
     private NamespacedKey heartKey, reviveKey;
     private ItemStack heartItem, reviveItem;
     private boolean commandApiFound, cloudPlaneFound;
@@ -81,20 +82,20 @@ public class LifestealMain extends JavaPlugin {
 
         heartKey = new NamespacedKey(this, "extra_heart");
         Bukkit.addRecipe(new ShapedRecipe(heartKey, heartItem) {{
-            shape("DND", "GHG", "DND");
-            setIngredient('D', Material.DIAMOND);
-            setIngredient('N', Material.NETHERITE_INGOT);
-            setIngredient('G', Material.GOLD_BLOCK);
-            setIngredient('H', Material.HEART_OF_THE_SEA);
-        }});
-
-        reviveKey = new NamespacedKey(this, "revive");
-        Bukkit.addRecipe(new ShapedRecipe(reviveKey, reviveItem) {{
             shape("NDN", "XTX", "NDN");
             setIngredient('N', Material.NETHERITE_INGOT);
             setIngredient('D', Material.DIAMOND_BLOCK);
             setIngredient('X', new RecipeChoice.MaterialChoice(Material.NETHER_STAR, Material.ENCHANTED_GOLDEN_APPLE));
             setIngredient('T', Material.TOTEM_OF_UNDYING);
+        }});
+
+        reviveKey = new NamespacedKey(this, "revive");
+        Bukkit.addRecipe(new ShapedRecipe(reviveKey, reviveItem) {{
+            shape("DND", "GHG", "DND");
+            setIngredient('D', Material.DIAMOND);
+            setIngredient('N', Material.NETHERITE_INGOT);
+            setIngredient('G', Material.GOLD_BLOCK);
+            setIngredient('H', Material.HEART_OF_THE_SEA);
         }});
 
         Bukkit.getPluginManager().registerEvents(new AfkListener(this), this);
@@ -104,7 +105,7 @@ public class LifestealMain extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ReviveListener(this), this);
         Bukkit.getPluginManager().registerEvents(new CustomItemListener(this), this);
 
-        GlobalTranslator.translator().addSource(new StaticTranslator(this));
+        GlobalTranslator.translator().addSource(translator = new StaticTranslator(this));
 
         if (!commandApiFound || !cloudPlaneFound) {
             // Wait one tick before executing the warning.
@@ -128,6 +129,7 @@ public class LifestealMain extends JavaPlugin {
         writeConfig();
         Bukkit.removeRecipe(heartKey);
         Bukkit.removeRecipe(reviveKey);
+        GlobalTranslator.translator().removeSource(translator);
     }
 
     public Map<UUID, Integer> lives() {
