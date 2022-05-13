@@ -127,6 +127,7 @@ public class LifestealMain extends JavaPlugin {
     public void onDisable() {
         writeConfig();
         Bukkit.removeRecipe(heartKey);
+        Bukkit.removeRecipe(reviveKey);
     }
 
     public Map<UUID, Integer> lives() {
